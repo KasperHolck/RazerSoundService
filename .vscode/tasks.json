@@ -1,0 +1,30 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Razer Sound Service Tray",
+            "type": "shell",
+            "command": "nuitka",
+            "args": [
+                "--standalone",
+                //"--onefile",
+                "--remove-output",
+                "--enable-plugin=tk-inter",
+                //"--windows-console-mode=disable",
+                "--windows-disable-console",
+                "${workspaceFolder}/src/tray.py",
+                "--output-filename=RazerSoundServiceTray",
+                "--output-dir=${workspaceFolder}/dist/dependencies"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        }
+    ]
+} // Press [ctrl]+[shift]+[b] to build
