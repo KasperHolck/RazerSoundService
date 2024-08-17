@@ -26,15 +26,11 @@ This repository provides a solution for a known issue with the Razer Kraken Head
 1. Clone the repository:
 
     ```sh
-    git clone https://github.com/your-repo/your-repo-name.git
+    git clone https://github.com/KasperHolck/RazerSoundService.git
     cd your-repo-name
     ```
 
-2. Navigate to the Rust application directory (usually `rust_service` or similar):
-
-    ```sh
-    cd rust_service
-    ```
+2. Navigate to the Rust application directory:
 
 3. Build the Rust application:
 
@@ -54,13 +50,7 @@ This repository provides a solution for a known issue with the Razer Kraken Head
 
 2. Press [CTRL] + [SHIFT] + B to build the tray application
 
-3. Run the tray application:
-
-    ```sh
-    python tray_app.py
-    ```
-
-   This tray application will handle installing the Rust application as a Windows service and allow you to manage it from the system tray.
+3. A dist folder will be created with the tray executable inside. Don't run it yet.
 
 ### 3. Packaging
 
@@ -79,4 +69,4 @@ This repository provides a solution for a known issue with the Razer Kraken Head
 ## Usage
 
 1. Once the tray application is running, you will see an icon in the system tray.
-2. Right-click the tray icon mouse over sevice and select "Install". 
+2. Right-click the tray icon and mouse over "Service" and select "Install". 
