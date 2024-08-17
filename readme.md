@@ -4,7 +4,7 @@
 
 This repository provides a solution for a known issue with the Razer Kraken Headset, where the headset may go to sleep and cut off audio due to inactivity. The project includes:
 
-- A Rust application that continuously plays a sound file to keep the headset active.
+- A Rust application that continuously plays an unnoticeable sound file to keep the headset active.
 - A Python-based tray application that installs and manages the Rust application as a Windows service.
 
 ## Features
