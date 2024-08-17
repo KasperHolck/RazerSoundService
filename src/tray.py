@@ -18,7 +18,7 @@ main_path_rss = os.environ['PROGRAMDATA'] + "\\RazerSoundService"
 
 nssm_path = main_path_rss + "\\dist\\dependencies\\nssm.exe"
 
-server_path = main_path_rss + "\\dist\\dependencies\\server.dist\\RazerSoundService.exe"
+server_path = main_path_rss + "\\dist\\dependencies\\server.dist\\RustRazerSound.exe"
 
 #######################################################################
 # ---------------------------- Main loop ---------------------------- #
@@ -86,6 +86,9 @@ def stop_service():
     action = [nssm_path, "stop", "RazerSoundService"]
     control_service(action)
 
+def quit_tray_app(icon):
+    icon.stop()
+
 #######################################################################
 # -------------------------- Click actions -------------------------- #
 #######################################################################
@@ -109,47 +112,56 @@ def on_clicked(icon, item):
         
         case 'Get Status':
             get_service_status()
+            
+        case 'Quit':
+            quit_tray_app(icon)
  
 #######################################################################
 # ----------------------- Build icon and menu ----------------------- #
 #######################################################################
        
-def create_gear_image():
+def create_icon_image():
     """Builds the image for the icon.
     """
+    green = 175
     
-    # Create an empty image with a black background
+    # Create an empty image with a green background
     size = (64, 64)  # Size of the image
-    image = Image.new('RGB', size, (0, 0, 0))
+    image = Image.new('RGBA', size, (0, green, 0, 255))  # Green background
     draw = ImageDraw.Draw(image)
-    
-    # Center and size of the gear
+
+    # Create a circular mask
+    mask = Image.new('L', size, 0)
+    mask_draw = ImageDraw.Draw(mask)
+    mask_draw.ellipse((0, 0, size[0], size[1]), fill=255)
+    image.putalpha(mask)  # Apply the circular mask
+
+    # Define the points of the diamond
     center = (32, 32)
-    outer_radius = 28
-    inner_radius = 15
-    num_teeth = 10
+    offset = 20  # Distance from center to corners
 
-    # Calculate the points for the teeth
-    points = []
-    for i in range(num_teeth * 2):
-        angle = i * (360 / (num_teeth * 2))
-        if i % 2 == 0:
-            r = outer_radius
-        else:
-            r = inner_radius
-        x = center[0] + r * math.cos(math.radians(angle))
-        y = center[1] + r * math.sin(math.radians(angle))
-        points.append((x, y))
-    
-    # Draw the gear
-    draw.polygon(points, fill=(255, 255, 255))
-
-    # Draw the inner circle
-    bbox = [
-        center[0] - inner_radius, center[1] - inner_radius,
-        center[0] + inner_radius, center[1] + inner_radius
+    points = [
+        (center[0], center[1] - offset),  # Top point
+        (center[0] + offset, center[1]),  # Right point
+        (center[0], center[1] + offset),  # Bottom point
+        (center[0] - offset, center[1])   # Left point
     ]
-    draw.ellipse(bbox, fill=(0, 0, 0))
+
+    # Draw the diamond shape
+    draw.polygon(points, fill=(0, 0, 0))  # White diamond
+
+    # Add a smaller diamond inside for a layered effect
+    inner_offset = 10
+    inner_points = [
+        (center[0], center[1] - inner_offset),
+        (center[0] + inner_offset, center[1]),
+        (center[0], center[1] + inner_offset),
+        (center[0] - inner_offset, center[1])
+    ]
+    draw.polygon(inner_points, fill=(0, green, 0))  # Black inner diamond
+
+    # Optionally add a border around the diamond
+    draw.line(points + [points[0]], fill=(0, 0, 0), width=2)
 
     return image
 
@@ -172,7 +184,9 @@ def build_menu() -> Menu:
                 MenuItem(
                     'Restart', on_clicked))),
         MenuItem(
-            'Get Status', on_clicked)
+            'Get Status', on_clicked),
+        MenuItem(
+            'Quit', on_clicked)
         )
 
 #######################################################################
@@ -183,7 +197,7 @@ def setup(icon):
     icon.visible = True
 
 def main():
-    icon_image = create_gear_image()
+    icon_image = create_icon_image()
     
     menu = build_menu()
     
