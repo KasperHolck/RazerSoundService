@@ -54,17 +54,19 @@ This repository provides a solution for a known issue with the Razer Kraken Head
 
 ### 3. Packaging
 
-1. From the rust release folder move the rust executable into dist/server.dist/ 
+1. From the rust release folder move the rust executable into dist/dependencies/server.dist/
 
-2. Drag the dist folder onto the desktop
+2. Install [NSSM](https://nssm.cc/download) and move the executable into dist/dependencies
 
-3. Run the dist/tray.dist/RazerSoundServiceTray.exe
+3. Drag the dist folder onto the desktop
 
-4. A folder will open, drag the whole dist folder into there
+4. Run the dist/dependencies/tray.dist/RazerSoundServiceTray.exe
 
-5. Run the ./dist/tray.dist/RazerSoundServiceTray.exe again as administrator.
+5. A folder will open, drag the whole dist folder into there
 
-6. For ease of use create a shortcut to this executable and place to desktop.
+6. Run the ./dist/dependencies/tray.dist/RazerSoundServiceTray.exe again as administrator.
+
+7. For ease of use create a shortcut to this executable and place to desktop.
 
 ## Usage
 
