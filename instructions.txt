@@ -1,0 +1,45 @@
+-------------------------------
+    Create new rust program
+-------------------------------
+>cargo new <name of cargo>
+
+-------------------------------
+          Run program
+-------------------------------
+cd into folder
+>cargo run
+
+-------------------------------
+        Compile program
+-------------------------------
+1. If single file with no dependencies:
+>rustc <path to file>
+
+2. If project with dependencies:
+>cargo build
+
+3. Final release build.
+>cargo build --release
+
+-------------------------------
+  Format code to look pretty
+-------------------------------
+cd into folder
+>rustfmt <path to file>
+
+
+-------------------------------
+         Dependencies
+-------------------------------
+>cargo install cargo-generate
+>cargo install cargo-bundle (For making MSI but doesn't work yet.)
+
+
+-------------------------------
+             Slint
+-------------------------------
+>cargo add slint
+
+Create project form template:
+>cargo generate --git https://github.com/slint-ui/slint-rust-template --name my-project
+

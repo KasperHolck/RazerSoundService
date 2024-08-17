@@ -1,0 +1,8 @@
+[package]
+name = "RustRazerSound"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rodio = "0.19"
+hound = "3.4.0"
