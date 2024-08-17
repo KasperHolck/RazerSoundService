@@ -5,3 +5,4 @@ __pycache__/
 *.out
 build/
 dist/
+".vscode/Program Signer.bat"
